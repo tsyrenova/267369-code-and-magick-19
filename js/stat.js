@@ -7,8 +7,9 @@ var CLOUD_Y = 10;
 var FONT_GAP = 20;
 var GAP = 10;
 var WIDTH_COLUMN = 40;
-var heightColumn = CLOUD_Y + CLOUD_HEIGHT - (GAP * 5) - (FONT_GAP * 4);
+var HEIGHT_COLUMN = CLOUD_Y + CLOUD_HEIGHT - (GAP * 5) - (FONT_GAP * 4);
 var WIDTH_BETWEEN_COLUMN = 50;
+var YOU = 'Вы';
 
 
 var renderCloud = function (ctx, x, y, color) {
@@ -20,10 +21,16 @@ function getMaxElement(numArray) {
   return Math.max.apply(null, numArray);
 }
 
-function getRandom(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
+function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function getColorColumn(name) {
+  if (name === YOU) {
+    return 'rgb(255, 0, 0)';
+  } else {
+    return 'hsl(240,' + getRandomNumber(0, 100) + '%' + ', 50%)';
+  }
 }
 
 window.renderStatistics = function (ctx, names, times) {
@@ -38,13 +45,9 @@ window.renderStatistics = function (ctx, names, times) {
   var maxTime = getMaxElement(times);
 
   for (var i = 0; i < times.length; i++) {
-    if (names[i] === 'Вы') {
-      ctx.fillStyle = 'rgb(255, 0, 0)';
-    } else {
-      ctx.fillStyle = 'hsl(240,' + getRandom(0, 100) + '%' + ', 50%)';
-    }
-    ctx.fillText(Math.round(times[i]), CLOUD_X + (WIDTH_BETWEEN_COLUMN * (i + 1)) + (WIDTH_COLUMN * i), CLOUD_Y + CLOUD_HEIGHT - (heightColumn * times[i]) / maxTime - (GAP * 2) - FONT_GAP);
-    ctx.fillRect(CLOUD_X + (WIDTH_BETWEEN_COLUMN * (i + 1)) + (WIDTH_COLUMN * i), CLOUD_Y + CLOUD_HEIGHT - GAP - FONT_GAP, WIDTH_COLUMN, -((heightColumn * times[i]) / maxTime));
+    ctx.fillStyle = getColorColumn(names[i]);
+    ctx.fillText(Math.round(times[i]), CLOUD_X + (WIDTH_BETWEEN_COLUMN * (i + 1)) + (WIDTH_COLUMN * i), CLOUD_Y + CLOUD_HEIGHT - (HEIGHT_COLUMN * times[i]) / maxTime - (GAP * 2) - FONT_GAP);
+    ctx.fillRect(CLOUD_X + (WIDTH_BETWEEN_COLUMN * (i + 1)) + (WIDTH_COLUMN * i), CLOUD_Y + CLOUD_HEIGHT - GAP - FONT_GAP, WIDTH_COLUMN, -((HEIGHT_COLUMN * times[i]) / maxTime));
     ctx.fillText(names[i], CLOUD_X + (WIDTH_BETWEEN_COLUMN * (i + 1)) + (WIDTH_COLUMN * i), CLOUD_Y + CLOUD_HEIGHT - GAP);
   }
 };
