@@ -16,6 +16,16 @@ var renderCloud = function (ctx, x, y, color) {
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
 };
 
+function getMaxElement(numArray) {
+  return Math.max.apply(null, numArray);
+}
+
+function getRandom(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 window.renderStatistics = function (ctx, names, times) {
   renderCloud(ctx, 110, 20, 'rgba(0, 0, 0, 0.7)');
   renderCloud(ctx, 100, 10, '#fff');
@@ -24,16 +34,6 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillStyle = '#000';
   ctx.fillText('Ура вы победили!', CLOUD_X + (GAP * 2), CLOUD_Y + GAP + FONT_GAP);
   ctx.fillText('Список результатов:', CLOUD_X + (GAP * 2), CLOUD_Y + GAP + (FONT_GAP * 2));
-
-  function getMaxElement(numArray) {
-    return Math.max.apply(null, numArray);
-  }
-
-  function getRandom(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
 
   var maxTime = getMaxElement(times);
 
