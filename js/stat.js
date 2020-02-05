@@ -11,12 +11,12 @@ var heightColumn = CLOUD_Y + CLOUD_HEIGHT - (GAP * 5) - (FONT_GAP * 4);
 var WIDTH_BETWEEN_COLUMN = 50;
 
 
-var renderCloud = function(ctx, x, y, color) {
+var renderCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
 };
 
-window.renderStatistics = function(ctx, names, times) {
+window.renderStatistics = function (ctx, names, times) {
   renderCloud(ctx, 110, 20, 'rgba(0, 0, 0, 0.7)');
   renderCloud(ctx, 100, 10, '#fff');
 
@@ -41,10 +41,10 @@ window.renderStatistics = function(ctx, names, times) {
     if (names[i] === 'Вы') {
       ctx.fillStyle = 'rgb(255, 0, 0)';
     } else {
-      ctx.fillStyle = 'hsl(240,' +  getRandom(0, 100) + '%' + ', 50%)';
+      ctx.fillStyle = 'hsl(240,' + getRandom(0, 100) + '%' + ', 50%)';
     }
-    ctx.fillText(Math.round(times[i]), CLOUD_X + (WIDTH_BETWEEN_COLUMN * (i + 1)) + (WIDTH_COLUMN * i), CLOUD_Y + CLOUD_HEIGHT - (heightColumn*times[i])/maxTime - (GAP * 2) - FONT_GAP); //150, 90
-    ctx.fillRect(CLOUD_X + (WIDTH_BETWEEN_COLUMN * (i + 1)) + (WIDTH_COLUMN * i), CLOUD_Y + CLOUD_HEIGHT - GAP - FONT_GAP, WIDTH_COLUMN, - ((heightColumn*times[i])/maxTime)); //(150, 250, 40, -150)
-    ctx.fillText(names[i], CLOUD_X + (WIDTH_BETWEEN_COLUMN * (i + 1)) + (WIDTH_COLUMN * i), CLOUD_Y + CLOUD_HEIGHT - GAP); //150, 270
+    ctx.fillText(Math.round(times[i]), CLOUD_X + (WIDTH_BETWEEN_COLUMN * (i + 1)) + (WIDTH_COLUMN * i), CLOUD_Y + CLOUD_HEIGHT - (heightColumn * times[i]) / maxTime - (GAP * 2) - FONT_GAP);
+    ctx.fillRect(CLOUD_X + (WIDTH_BETWEEN_COLUMN * (i + 1)) + (WIDTH_COLUMN * i), CLOUD_Y + CLOUD_HEIGHT - GAP - FONT_GAP, WIDTH_COLUMN, -((heightColumn * times[i]) / maxTime));
+    ctx.fillText(names[i], CLOUD_X + (WIDTH_BETWEEN_COLUMN * (i + 1)) + (WIDTH_COLUMN * i), CLOUD_Y + CLOUD_HEIGHT - GAP);
   }
 };
