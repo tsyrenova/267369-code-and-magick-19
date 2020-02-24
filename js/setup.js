@@ -86,10 +86,8 @@ var inputEyesColor = setup.querySelector('input[name=eyes-color]');
 var inputFireballColor = setup.querySelector('input[name=fireball-color]');
 
 var closeEscapePopup = function (event) {
-  if (event.key === ESCAPE) {
-    if (document.activeElement.className !== 'setup-user-name') {
-      closePopup();
-    }
+  if (event.key === ESCAPE && document.activeElement.className !== 'setup-user-name') {
+    closePopup();
   }
 };
 
